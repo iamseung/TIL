@@ -1,4 +1,4 @@
-## AWS Lambda
+## _AWS Lambda_
 
 AWS Lambda는 Amazon Web Services(AWS)가 제공하는 서버리스 컴퓨팅 서비스입니다. 
 이 서비스를 사용하면 개발자가 서버 관리에 대해 걱정하지 않고도 코드를 실행할 수 있습니다.  
