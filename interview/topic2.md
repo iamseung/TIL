@@ -29,6 +29,8 @@
 
 - ThreadPoolExecutor는 어떻게 동작하나요?
 
+https://leeyh0216.github.io/posts/truth_of_threadpoolexecutor/
+
 - 커스텀 불변 클래스를 어떻게 만드나요? 자바에서 불변 클래스의 예는 무엇인가요?
 
 - hasCode()와 equals()가 무엇인가요? map에서 객체를 키로 사용하면 어떻게 되마요? 올바르게 사용하는 방법은 무엇인가요?
