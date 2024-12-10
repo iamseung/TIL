@@ -155,3 +155,56 @@ public class DecoUtil1 {
 **인스턴스 메서드**
 
 `static` 이 붙지 않은 메서드는 인스턴스를 생성해야 호출할 수 있다. 이것을 **인스턴스 메서드**라 한다.
+
+### 정적 메서드 사용법
+
+정적 메서드는 객체 생성없이 클래스에 있는 메서드를 바로 호출할 수 있다는 장점이 있다.
+하지만 정적 메서드는 언제나 사용할 수 있는 것이 아니다.
+
+```java
+package static2;
+
+public class DecoData {
+
+    private int instanceValue;
+    private static int staticValue;
+
+    public static void staticCall() {
+        //instanceValue++; //인스턴스 변수 접근, compile error
+        //instanceMethod(); //인스턴스 메서드 접근, compile error
+
+        staticValue++; //정적 변수 접근
+        staticMethod(); //정적 메서드 접근
+    }
+
+    public void instanceCall() {
+        instanceValue++; //인스턴스 변수 접근
+        instanceMethod(); //인스턴스 메서드 접근
+
+        staticValue++; //정적 변수 접근
+        staticMethod(); //정적 메서드 접근
+    }
+
+    private void instanceMethod() {
+        System.out.println("instanceValue=" + instanceValue);
+    }
+
+    private static void staticMethod() {
+        System.out.println("staticValue=" + staticValue);
+    }
+}
+```
+
+- `static` 메서드는 `static` 만 사용할 수 있다.
+    - 클래스 내부의 기능을 사용할 때, 정적 메서드는 `static` 이 붙은 ****정적 메서드나 정적 변수만 사용할 수 있다.**
+    - 클래스 내부의 기능을 사용할 때, 정적 메서드는 인스턴스 변수나, 인스턴스 메서드를 사용할 수 없다.
+- 반대로 모든 곳에서 `static` 을 호출할 수 있다.
+    - 정적 메서드는 공용 기능이다. 따라서 접근 제어자만 허락한다면 클래스를 통해 모든 곳에서 `static` 을 호출할 수 있다.
+
+- `instanceValue` 는 인스턴스 변수이다.
+- `staticValue` 는 정적 변수(클래스 변수)이다.
+- `instanceMethod()` 는 인스턴스 메서드이다.
+- `staticMethod()` 는 정적 메서드(클래스 메서드)이다.
+
+- `static void staticCall` 에서 `instaceValue` 는 인스턴스가 생성되고, 힙 영영에 생성되어야지 접근이 가능하다.
+- `static void instanceCall` 에서는 모두 접근 가능하다.
