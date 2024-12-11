@@ -170,8 +170,10 @@ public class DecoData {
     private static int staticValue;
 
     public static void staticCall() {
-        //instanceValue++; //인스턴스 변수 접근, compile error
-        //instanceMethod(); //인스턴스 메서드 접근, compile error
+        // 인스턴스 변수 접근, compile error
+        //instanceValue++; 
+        // 인스턴스 메서드 접근, compile error
+        //instanceMethod(); 
 
         staticValue++; //정적 변수 접근
         staticMethod(); //정적 메서드 접근
