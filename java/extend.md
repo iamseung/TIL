@@ -154,3 +154,129 @@ public class ElectricCar extends Car {
 - **예외**: 오버라이딩 메서드는 상위 클래스의 메서드보다 더 많은 체크 예외를 `throws` 로 선언할 수 없다. 하지만 더 적거나 같은 수의 예외, 또는 하위 타입의 예외는 선언할 수 있다. 예외를 학습해야 이해할 수 있다. 예외는 뒤 에서 다룬다.
 - `static` , `final` , `private` : 키워드가 붙은 메서드는 오버라이딩 될 수 없다. `static` 은 클래스 레벨에서 작동하므로 인스턴스 레벨에서 사용하는 오버라이딩이 의미가 없다. 쉽게 이 야기해서 그냥 클래스 이름을 통해 필요한 곳에 직접 접근하면 된다. `final` 메서드는 재정의를 금지한다. `private` 메서드는 해당 클래스에서만 접근 가능하기 때문에 하위 클래스에서 보이지 않는다. 따라서 오 버라이딩 할 수 없다.
 - **생성자 오버라이딩**: 생성자는 오버라이딩 할 수 없다.
+
+## 상속과 접근 제어
+
+![poster](../image/extend7.png)
+
+### 접근 제어자의 종류
+
+- `private` : 모든 외부 호출을 막는다.
+- `default` (package-private): 같은 패키지안에서 호출은 허용한다.
+- `protected` : 같은 패키지안에서 호출은 허용한다. 패키지가 달라도 상속 관계의 호출은 허용한다.
+- `public` : 모든 외부 호출을 허용한다.
+
+순서대로 `private` 이 가장 많이 차단하고, `public` 이 가장 많이 허용한다. 
+
+`private -> default -> protected -> public`
+
+`Parent.java`
+
+```java
+package extends1.access.parent;
+
+public class Parent {
+
+    public int publicValue;
+    protected int protectedValue;
+    int defaultValue;
+    private int privateValue;
+
+    public void publicMethod() {
+        System.out.println("Parent.publicMethod");
+    }
+    protected void protectedMethod() {
+        System.out.println("Parent.protectedMethod");
+    }
+    void defaultMethod() {
+        System.out.println("Parent.defaultMethod");
+    }
+    private void privateMethod() {
+        System.out.println("Parent.privateMethod");
+    }
+
+    public void printParent() {
+        System.out.println("==Parent 메서드 안==");
+        System.out.println("publicValue = " + publicValue);
+        System.out.println("protectedValue = " + protectedValue);
+        System.out.println("defaultValue = " + defaultValue);
+        System.out.println("privateValue = " + privateValue);
+
+        //부모 메서드 안에서 모두 접근 가능
+        defaultMethod();
+        privateMethod();
+    }
+
+}
+
+```
+
+`Child.java`
+
+```java
+package extends1.access.child;
+
+import extends1.access.parent.Parent;
+
+public class Child extends Parent {
+
+    public void call() {
+        publicValue = 1;
+        protectedValue = 1; // 상속 관계 or 같은 패키지
+        //defaultValue = 1; // 다른 패키지 접근 불가, 컴파일 오류
+        //privateValue = 1; // 접근 불가, 컴파일 오류
+
+        publicMethod();
+        protectedMethod(); // 상속 관계 or 같은 패키지
+        //defaultMethod(); // 다른 패키지 접근 불가, 컴파일 오류
+        //privateMethod(); // 접근 불가, 컴파일 오류
+
+        printParent();
+    }
+}
+
+```
+
+`ExtendsAccessMain.java`
+
+```java
+package extends1.access;
+
+import extends1.access.child.Child;
+
+public class ExtendsAccessMain {
+
+    public static void main(String[] args) {
+        Child child = new Child();
+        child.call();
+    }
+}
+```
+
+**둘의 패키지가 다르다는 부분의 유의하자**
+
+자식 클래스인 `Child` 에서 부모 클래스인 `Parent` 에 얼마나 접근할 수 있는지 확인해보자.
+
+- `publicValue = 1`
+
+부모의 `public` 필드에 접근한다. `public` 이므로 접근할 수 있다.
+
+- `protectedValue = 1`
+
+부모의 `protected` 필드에 접근한다. 자식과 부모는 다른 패키지이지만, **상속 관계이므로 접근할 수 있다.**
+
+- `defaultValue = 1`
+
+부모의 `default`필드에 접근한다. 자식과 부모가 다른 패키지이므로 접근할 수 없다.
+
+- `privateValue = 1`
+
+부모의 `private` 필드에 접근한다. `private`은 모든 외부 접근을 막으므로 자식이라도 호출할 수 없다.
+
+### 접근 제어와 메모리 구조
+
+![poster](../image/extend8.png)
+
+본인 타입에 없으면 부모 타입에서 기능을 찾는데, 이때 접근 제어자가 영향을 준다. 
+
+왜냐하면 객체 내부에서는 자식과 부모가 구분되어 있기 때문이다. 결국 자식 타입에서 부모 타입의 기능을 호출할 때, 부모 입장에서 보면 외부에서 호출 한 것과 같다.
