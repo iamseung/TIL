@@ -53,7 +53,7 @@
 
 -----------------------
 
-### Spring Framework 를 사용하느 ㄴ이유
+### Spring Framework 를 사용하는 이유
 
 <details>
     <summary> 예비 답안 </summary>
@@ -72,6 +72,24 @@
 5. `모듈화된 설계` → Core, Data Access, Web, Security 등 다양한 모듈로 구성되어 필요에 따라 선택적으로 사용할 수 있다.
 6. 유연한 설정 방식 → XML, Java Config, 어노테이션 기반 설정을 모두 지원한다. 즉, 설정 파일의 중앙화 때문에 환경 변화에 유연하게 대응이 가능합니다.
     
+</details>
+
+-----------------------
+
+### logger 를 지향하고, System.out.println() 을 지양하는 이유
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+1. 성능 문제
+
+    System.out.println(stdout) 은 Blocking I/O 로 동작하므로, 로그를 출력하는 동안 애플리케이션이 멈출 수 있습니다. 특히, 대량의 로그를 출력하는 경우 성능이 크게 저하됩니다. 예시로 stdout 을 다량 사용하면 GC 의 영향을 받아 애플리케이션 응답 속도가 느려질 수 있습니다.<br>
+    또한, System.out 은 synchronized 메서드(Thread-safe)라서 여러 스레드가 동시에 로그를 출력할 경우 성능 병목이 발생할 수 있습니다.
+
+2. 로그 관리 효율성 증가
+
+    stdout 으로 출력하면 전체 로그를 출력해야 하므로 필요없는 로그까지 출력될 수 있습니다. 또한 stdout 은 서버를 재시작하면 로그가 사라지는 휘발성이기 때문에 log4j 를 사용하여 파일 또는 원격 서버로 저장이 가능합니다.
 </details>
 
 -----------------------
