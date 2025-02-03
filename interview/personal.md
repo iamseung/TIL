@@ -97,3 +97,19 @@
 </details>
 
 -----------------------
+
+### Filter 과 Interceptor
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+Filter 는 HTTP 요청을 가로채어, 특정 작업을 수행할 수 있도록 하는 컴포넌트입니다. 주로 보안/로깅/데이터 처리/요청 수정 등 다양한 작업을 처리할 수 있습니다.
+
+Intercepter 는 Spring 의 HandlerIntercepter 인터페이스를 구현하여 요청 전/후 및 완료 단계에서 처리 로직을 삽입할 수 있다.
+
+
+
+</details>
+
+-----------------------
