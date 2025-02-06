@@ -117,7 +117,47 @@
 
 실제 요청 흐름
 
-클라이언트 -> Filter -> DispatcherServlet -> Integerceptor (preHandle) -> Controller -> Integerceptor (postHandler) -> Integerceptor(afterCompletion) 응답
+클라이언트 -> Filter -> DispatcherServlet -> Intercepter (preHandle) -> Controller -> Intercepter (postHandler) -> Intercepter (afterCompletion) 응답
+</details>
+
+-----------------------
+
+### Checked vs Unchecked Exception 
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+`Checked Exception` 은 RuntimeException 을 상속하지 않는 클래스로, 컴파일 시점에 컴파일러에서 확인하는 예외입니다. 반드시 에러 처리를 해야 하는 특징(try/catch or throw) 을 가지고 있습니다.
+ex )
+    IOException: 파일 또는 네트워크 연결에서 읽기 또는 쓰기와 같은 입력/출력 작업과 관련된 오류
+    SQLException: 데이터베이스 액세스 및 쿼리와 관련된 오류
+    ClassNotFoundException: 동적으로 클래스 로드와 관련된 오류
+    InterruptedException: 스레드 중단 및 동기화와 관련된 오류의 경우
+
+`Unchecked Exception` 는 RuntimeException 을 상속하는 클래스로, 런타임 단계에서 확인이 가능하며 에러 처리를 강제하지 않습니다. 개발자가 예상치 못한 에러가 발생할 수 있기 때문에 예외처리를 강제하지 않는다는 의미입니다.
+
+</details>
+
+-----------------------
+
+### Maven vs Gradle
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+
+|비교 항목|Maven|Gradle|
+|---| ---- | ---- |
+|빌드 스크립트|	XML (pom.xml) | Groovy/Kotlin (build.gradle)|
+|빌드 속도|	느림 (단계별 실행) | 빠름 (태스크 단위 실행, 캐싱 지원)|
+|의존성 관리|	선언적 방식 | 유연한 방식|
+|사용 방식|	설정 기반 (Configuration) | 코드 기반 (Convention)|
+|확장성|	플러그인 기반 | 커스텀 태스크 작성 가능|
+|병렬 처리|	기본적으로 지원 X | 병렬 실행 가능|
+
+    Maven 은 설정 중심이며, Gradle 은 코드 기반으로 속도가 빠르고 유연하다는 차이점이 있습니다.
+    
 </details>
 
 -----------------------
