@@ -13,7 +13,7 @@
 - JVM 의 구조는 
     - JVM 내로 클래스 파일을 로드하고, 링크를 통해 배치하는 작업을 수행하는 모듈인 `Class Loader`
     - 클래스 로더를 통해 JVM 내의 Runtime Data Area 에 배치된 바이트 코드들을 명령어 단위로 실행하는 `Execution Engine`
-    - 힙 메모리 영역에 생성된 객체들 중에서 참조되지 않은 객체들을 탐색 후, 제거하는 역할을 하는 `Garbage Collector`
+    - 힙 메모리 영역에 생성된 객체들 중에서 참조되지 않은 객체들(Unreachable)을 탐색 후, 제거하는 역할을 하는 `Garbage Collector`
     - JVM 의 메모리 영역으로, 자바 애플리케이션을 실행할 때 사용되는 데이터들을 적재하는 영역인 `Runtime Data Area`
     
 ```
@@ -54,7 +54,7 @@ jvm 은 크게 클래스 로더(Class Loader), 실행 엔진(Execution Engine), 
     - 새롭게 생성되는 객체는 Young Generation 영역 중 Eden 에서 생성되며, Eden 공간이 가득차면 MinorGC가 동작하여 생존한 객체가 증가된 age-bit과 함께 Survivor0 영역으로 넘어가게 됩니다.
     - 위의 과정을 통해 Young Generation 의 마지막 영역인 Survivor1 영역의 GC에서도 살아남는다면 Old Generation 영역으로 넘어가게 됩니다.
     - `Old Generation` 은 길게 살아남는 메모리들이 존재하는 공간입니다. Old Generation의 객체들은 처음에는 Young Generation 에 의해 시작되었으나, GC 과정 중에 제거되지 않은 경우 Old Generation로 이동합니다. (Major GC)
-    - Old Generation 에서 발생하는 Major GC 는 매우 큰 공간이기 때문에 데이터를 지우는데 많은 시간이 소요되며, Major GC 가 발생하면 Thread 가 멈추고 Mark and Swap 작업을 해야 해서 CPU에 부하를 줄 수 있습니다.
+    - Old Generation 에서 발생하는 Major GC 는 매우 큰 공간이기 때문에 데이터를 지우는데 많은 시간이 소요되며, Major GC 가 발생하면 Thread 가 멈추고 Mark and Sweep 작업을 해야 해서 CPU에 부하를 줄 수 있습니다.
 
     
 ```
