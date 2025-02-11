@@ -3,7 +3,7 @@
 ## 제네릭(Generics) 이란
 
 `제네릭(Generics)` 은 클래스나 메서드에서 사용할 데이터 타입을 파라미터화하는 기능입니다.
-즉, 컴파일 시 타입을 지정할 수 있도록 하여 코드의 재사용성을 높이고, 타입 안정성을 보장할 수 있습니다.
+> `즉, 컴파일 시 타입을 지정할 수 있도록 하여 코드의 재사용성을 높이고, 타입 안정성을 보장할 수 있습니다.`
 
 ## 1. 제네릭을 사용하는 이유
 1. 컴파일 타임 타입 체크 → 실행 전에 오류를 잡을 수 있습니다.
@@ -43,6 +43,7 @@ public class GenericExample {
         // 제네릭 사용
         ArrayList<String> list = new ArrayList<>();
         list.add("Hello");
+
         // ❌ 컴파일 에러 (String 타입만 허용)
         // list.add(100);
 
@@ -95,6 +96,7 @@ public class Main {
 
 ```java
 class Util {
+    // 여기서 <T> 는 반환 타입을 지정하는 것이 아니라, 해당 메서드에서 사용할 "타입 매개변수"를 정의하는 역할.
     public static <T> void print(T data) { // 제네릭 메서드
         System.out.println(data);
     }
@@ -110,7 +112,7 @@ public class Main {
 ```
 
 ### 제네릭 메서드의 특징
-- <T> 를 사용하여 타입을 일반화할 수 있습니다.
+- `<T>` 를 사용하여 타입을 일반화할 수 있습니다.
 - 매개변수의 타입을 유연하게 처리 가능합니다.
 
 ## 5. 제네릭 타입 제한, Bounded Type 
