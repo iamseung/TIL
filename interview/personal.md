@@ -196,3 +196,17 @@ ex )
 </details>
 
 -----------------------
+
+### HashMap vs TreeMap
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+- **`HashMap`은 해시 테이블을 기반으로 key를 탐색하므로 평균적으로 O(1)의 속도를 가집니다.**
+- **반면, `TreeMap`은 Red-Black Tree(균형 이진 탐색 트리)를 기반으로 O(log N)의 속도를 가지며, key를 자동으로 정렬해줍니다.**
+
+**따라서, 빠른 탐색이 필요하면 `HashMap`을, key 정렬이 필요하면 `TreeMap`을 사용합니다.**
+    
+</details>
+
+-----------------------
