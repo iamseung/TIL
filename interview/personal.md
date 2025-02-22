@@ -116,6 +116,20 @@ Mark-Sweep 이란 다양한 GC에서 사용되는 객체를 솎아내는 내부 
 
 -----------------------
 
+### Spring Framework 와 Spring Boot 의 차이
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+Spring Boot는 Spring Framework 위에 구축되어 동일한 기술 스택을 사용하지만, 설정의 자동화, 내장 서버, 스타터 의존성 등을 통해 개발과 배포 과정을 대폭 단순화시켜준다. 
+이는 개발자가 복잡한 설정과 인프라에 대한 걱정 없이 비즈니스 로직에 집중하게 해준다는 장점이 있다.
+
+    
+</details>
+
+-----------------------
+
 ### logger 를 지향하고, System.out.println() 을 지양하는 이유
 
 <details>
