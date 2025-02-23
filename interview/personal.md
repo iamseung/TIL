@@ -122,8 +122,38 @@ Mark-Sweep 이란 다양한 GC에서 사용되는 객체를 솎아내는 내부 
     <summary> 예비 답안 </summary>
     <br />
 
+### Spring Framework 와 Spring Boot 의 차이
+
+1. **설정의 단순화**: 
+Spring Framework를 사용하여 애플리케이션을 설정하려면 XML 또는 Java 기반의 설정이 필요하며, 데이터 소스, 뷰 리졸버, 컴포넌트 스캔 등 많은 세부 사항을 처리해야 한다. 반면에 Spring Boot는 이러한 설정을 자동화해준다. Spring Boot는 '의견을 가진(opinionated)' 설정을 통해 애플리케이션 개발에 최적화된 기본 설정을 제공한다.
+2. **내장 서버**: 
+Spring Framework 애플리케이션을 실행하려면 별도의 서버(WAS)가 필요하다. 반면에 Spring Boot는 Tomcat, Jetty, Undertow 등의 서버를 내장하고 있어, 별도의 WAS 설치 없이 애플리케이션을 실행할 수 있다.
+3. **스타터 의존성**: 
+Spring Boot는 스타터 의존성을 제공한다. 이는 필요한 라이브러리들을 그룹화하여 제공하므로, 개별적인 라이브러리를 찾고 추가하는 번거로움을 줄여준다.
+4. **Actuator**: 
+Spring Boot Actuator는 애플리케이션의 모니터링과 관리를 위한 기능을 제공한다. 이는 Spring Framework 자체에는 포함되어 있지 않는 기능이다.
+
+### Spring Boot 가 가지고 있는 추가적인 기능
+
+1. **YAML 지원**: 
+Spring Boot는 설정 파일을 작성할 때 Java나 XML 뿐만 아니라 YAML 파일도 지원한다. 
+이는 구조화된 데이터를 표현하는 데 매우 유용한 형식으로, 특히 복잡한 데이터 구조를 다룰 때 가독성이 더 좋다.
+2. **Spring Boot DevTools**: 
+Spring Boot는 개발 중에 애플리케이션을 자동으로 재시작하고, 라이브 리로드를 제공하는 DevTools를 제공한다. 
+이는 개발 과정을 더욱 효율적으로 만들어 준다.
+3. **배너 커스터마이징**: 
+Spring Boot는 애플리케이션 시작 시 나타나는 배너를 커스터마이징 할 수 있게 해준다. 
+이는 사소한 기능일 수 있지만, 애플리케이션의 개성을 표현하거나 명확한 식별 정보를 제공하는 데 도움이 될 수 있다.
+4. **스프링 부트의 Executable JARs/WARs**: 
+스프링 부트는 실행 가능한 JARs 또는 WARs 생성이 가능하며, 이는 단독으로 실행 가능한 스프링 애플리케이션을 만드는데 매우 편리하다.
+이는 전통적인 WAR 파일 배포와 비교하여 배포와 실행을 단순화한다.
+
+```
 Spring Boot는 Spring Framework 위에 구축되어 동일한 기술 스택을 사용하지만, 설정의 자동화, 내장 서버, 스타터 의존성 등을 통해 개발과 배포 과정을 대폭 단순화시켜준다. 
 이는 개발자가 복잡한 설정과 인프라에 대한 걱정 없이 비즈니스 로직에 집중하게 해준다는 장점이 있다.
+```
+
+https://www.inflearn.com/blogs/3315?gad_source=1&gclid=CjwKCAiAiOa9BhBqEiwABCdG81uOlX88AWI7HFBQmJDPDzUyQ9o4j7AgZ4JVQpAt9F6wY3yVRiVD1RoC3g0QAvD_BwE
 
     
 </details>
@@ -225,6 +255,20 @@ ex )
 - **반면, `TreeMap`은 Red-Black Tree(균형 이진 탐색 트리)를 기반으로 O(log N)의 속도를 가지며, key를 자동으로 정렬해줍니다.**
 
 **따라서, 빠른 탐색이 필요하면 `HashMap`을, key 정렬이 필요하면 `TreeMap`을 사용합니다.**
+    
+</details>
+
+-----------------------
+
+### IoC, 제어의 역전이란
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+IoC 는 객체의 생성과 관리를 스프링 프레임워크가 대신하도록 위임하도록 하는 것입니다.스프링 컨테이너에 Bean 을 미리 등록하고, 필요한 곳에서 컨테이너의 빈을 가져와 사용할 수 있게 해줍니다.
+이때 Bean 을 가져올 때 의존성 주입(DI) 방식을 사용하여 객체 간의 의존성을 자동으로 주입받을 수 있게 됩니다.
+
+예시로 Controller, Service 와 같은 객체들의 동작을 우리가 직접 구현하기는 하지만, 해당 객체들이 어느 시점에 호출될 지는 신경쓰지 않습니다. 단지 프레임워크가 요구하는대로 객체를 생성하면, 프레임워크가 해당 객체들을 가져다가 생성하고, 메서드를 호출하고, 소멸시킵니다. → 프로그램의 제어권이 역전된 것
     
 </details>
 
