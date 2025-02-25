@@ -2,6 +2,8 @@
 
 `Spring WebFlux`는 `비동기(Asynchronous)`, `논블로킹(Non-blocking)` 프로그래밍을 지원하는 리액티브 웹 프레임워크입니다. 기존 Spring MVC는 블로킹 방식(Synchronous, Thread-per-request) 을 기반으로 하지만, WebFlux는 리액티브 스트림(Reactive Streams)과 프로젝트 리액터(Project Reactor)를 기반으로 한 논블로킹 방식을 제공합니다.
 
+📖 즉, Spring Webflux 는 `Reactive Streams` 표준을 기반으로 동작하며, 내부적으로 `Project Reactor` 라이브러리를 사용하여 비동기 & Non-blocking 방식의 프로그래밍을 지원하며, 이를 통해 스레드 풀의 효율적인 사용과 고성능 처리가 가능합니다.
+
 이제 WebFlux의 개념, 특징, 작동 방식, 장점과 단점을 깊이 있게 알아보겠습니다.
 
 ## 1. Spring WebFlux란?
