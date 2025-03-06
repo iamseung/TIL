@@ -66,6 +66,9 @@ flux.subscribe(System.out::println);
 → 여러 개의 데이터를 포함하는 Flux는 비동기적으로 여러 개의 값을 반환합니다.
 ```
 
+### (3) Netty 기반의 Event Loop(기본 설정)
+- Tomcat, Jetty, Undertow 등과 다르게 기본적으로 Netty 를 사용하여 Event Loop 기반의 Non-Blocking I/O 처리
+
 ## 4. Spring WebFlux의 주요 기능
 ### (1) 어노테이션 기반 (Spring MVC 스타일)
 기존 Spring MVC와 유사하게 @RestController, @RequestMapping을 사용할 수 있습니다.
