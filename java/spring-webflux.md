@@ -135,7 +135,25 @@ public interface UserRepository extends ReactiveCrudRepository<User, String> {
 - JPA와 같이 블로킹 라이브러리를 많이 사용하는 경우
 - WebFlux는 블로킹 라이브러리와 함께 사용하기 어렵기 때문에, 기존 프로젝트를 WebFlux로 전환하려면 많은 수정이 필요
 
-## 7. 결론
+## 7. Spring WebFlux 의 동작 원리
+
+### (1) 요청 처리 흐름
+HTTP 요청이 들어오면 WebFlux는 다음과 같은 방식으로 요청을 처리한다.
+
+1. 클라이언트가 HTTP 요청을 보냄.
+2. Netty Event Loop(Thread) 가 요청을 비동기적으로 수신.
+3. 요청이 Dispatcher Handler로 전달됨.
+4. RouterFunction 또는 @RestController 기반의 Handler Function이 실행됨.
+5. Handler가 Mono 또는 Flux를 반환하면, Reactor가 이를 구독(subscribe)하여 처리.
+6. 데이터가 준비되면 Netty Event Loop Thread가 응답을 비동기적으로 클라이언트에 반환.
+
+### (2) Non-blocking의 핵심: Netty 기반 Event Loop
+- Spring WebFlux는 Netty의 Event Loop 모델을 사용하여 적은 수의 스레드로 많은 요청을 처리.
+- 기본적으로 EventLoopGroup(스레드 그룹) 내의 스레드가 Non-blocking 방식으로 요청을 처리.
+- 데이터베이스 호출, API 호출 같은 I/O 작업도 Reactor의 Schedulers를 사용하여 비동기 실행.
+
+
+## 8. 결론
 Spring WebFlux는 비동기, 논블로킹 기반의 고성능 웹 애플리케이션을 개발할 수 있도록 도와주는 프레임워크입니다.
 
 - Mono와 Flux를 사용하여 비동기 방식으로 데이터를 처리
