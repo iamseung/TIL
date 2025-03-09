@@ -325,3 +325,43 @@ HTTPS는 SSL/TLS 인증서를 필요로 하며, 이를 통해 웹사이트의 �
 </details>
 
 -----------------------
+
+### BCrypt 란 ?
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+BCrypt는 보안성이 뛰어난 비밀번호 해싱 알고리즘으로, 비밀번호를 안전하게 저장하는 데 사용됩니다.
+특히, 솔트(Salt) 추가, 비용 인자(Cost Factor) 적용, Brute Force(무차별 대입 공격) 방어 기능을 제공합니다.
+
+### 1. BCrypt의 특징
+
+✅ 1) 단방향 해싱 (One-way Hashing)
+- 암호화가 아니라 해싱(Hashing) 기법을 사용하여, 해싱된 값에서 원래의 패스워드를 복원할 수 없음.
+
+✅ 2) 솔트(Salt) 자동 생성
+- 랜덤한 솔트(Salt)를 생성하여 패스워드와 함께 해싱하므로, 동일한 패스워드라도 해시 결과가 다름.
+- 이를 통해 레인보우 테이블 공격(Rainbow Table Attack) 을 방어할 수 있음.
+
+✅ 3) 비용 인자(Cost Factor) 설정 가능
+- 연산 횟수를 조정하여, 컴퓨팅 성능에 따라 보안 강도를 조절할 수 있음.
+- 기본적으로 2^cost 만큼의 반복 연산을 수행하여, brute-force 공격에 대한 방어력이 높음.
+
+✅ 4) 느린 연산 속도
+- 보안 강화를 위해 해싱 속도가 빠르지 않음.
+- 해커가 수많은 비밀번호를 대입하는 무차별 대입 공격(Brute Force Attack)을 어렵게 만듦.
+
+### 2. BCrypt 해싱 구조
+BCrypt 해시 값의 형식은 다음과 같다 
+
+```
+$2a$10$K1qLkjF9VQCd8N95fB6NUu8d87dBD23S3WxL6y/4EXR1MiPx8FlpG
+```
+
+1. $2a$ → 알고리즘 버전 ($2a$, $2b$, $2y$ 등)
+2. 10$ → Cost Factor (2^10 = 1024번 해싱 반복)
+3. K1qLkjF9VQCd8N95fB6NUu8d87dBD23S3WxL6y/4EXR1MiPx8FlpG → 솔트 + 해시된 비밀번호
+
+</details>
+
+-----------------------
