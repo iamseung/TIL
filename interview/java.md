@@ -306,42 +306,57 @@ default method는 인터페이스를 구현한 클래스에서 코드를 구현�
 
 -----------------------
 
-### ㅓㅍ
+### java load, unload
 
 <details>
     <summary> 예비 답안 </summary>
     <br />
 
-- @Controller 는 기본 반환 방식이 View 이름(String) 이며, HTML 페이지 반환 등 템플릿 기반 응답에 사용됩니다.
+- JVM Load 는 클래스가 필요한 시점에 동적으로 클래스의 바이트 코드를 읽어 메모리에 할당하는 과정
+- JVM Unload 는 클래스가 더 이상 사용되지 않아 메모리에서 클래스를 해제하는 과정
+    
+</details>
+
+-----------------------
+
+### new String() 을 사용한 문자열 선언
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
 
 ```java
-@Controller
-public class PageController {
+String string1 = "abc";
+String string2 = new String("abc");
+```
 
-    @GetMapping("/hello")
-    public String hello(Model model) {
-        model.addAttribute("message", "Hello!");
-        return "hello";  // templates/hello.html 렌더링
-    }
+위의 코드는 String class를 만드는 두가지 방법을 나타낸다. 두가지 방법은 보기에는 같은 결과가 나온다고 생각할 수 있지만 내부적으로는 다른 결과를 낸다. string1과 string2는 스트링 풀(String pool)에 있는 같은 객체를 바라보게 된다. 
+<br> 반면에 new String()을 통해 생성한 string3 의 경우는 힙 메모리에 새로운 String 인스턴스를 만들어 관리를 하게 된다. 예시 코드를 작성하여 수행해보면 다음과 같은 결과가 나온다.
+
+```java
+public class StringTest {
+
+	public static void main(String[] args) {
+		String string1 = new String("abc");
+		String string2 = new String("abc");
+
+		System.out.println(string1 == string2); // false
+
+		String string3 = "abc";
+		String string4 = "abc";
+
+		System.out.println(string3 == string4); // true
+	}
 }
 ```
 
-- @RestController 는 기본 반환 방식이 JSON, XML(객체 직렬화) 이며, REST API 응답에 사용됩니다.(주로 JSON 반환)
+위의 코드의 경우 new String 을 사용하여 새로운 인스턴스를 생성한 string1, string2의 경우는 서로 다른 주소값을 가르켜 false라는 결과를 반환한다. 반면에 스트링 풀의 주소만을 가르키며 생성한 string3, string4의 경우는 값이 같다는 결과가 나오게 된다.
 
-```java
-@RestController
-public class ApiController {
+| 구분 | 저장 위치 | 인스턴스 생성 여부 | 비교 결과 (==) |
+| -- | -- | -- | -- |
+| `new String("abc")` | Heap + (내부적으로 String Pool 참조) | 새 인스턴스 생성 | false |
+| `"abc" 리터럴` | String Pool | Pool에 이미 있으면 재사용 |  true |
 
-    @GetMapping("/api/hello")
-    public Map<String, String> hello() {
-        return Map.of("message", "Hello!");
-        // JSON: { "message": "Hello!" }
-    }
-}
-```
-- @Controller + @ResponseBody 의 조합
-- 반환값을 HTTP 응답 본문(body) 에 바로 JSON/XML 등으로 전송
-- RESTful API 개발에 최적화
     
 </details>
 
