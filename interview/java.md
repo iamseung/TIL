@@ -305,3 +305,44 @@ default method는 인터페이스를 구현한 클래스에서 코드를 구현�
 </details>
 
 -----------------------
+
+### ㅓㅍ
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+- @Controller 는 기본 반환 방식이 View 이름(String) 이며, HTML 페이지 반환 등 템플릿 기반 응답에 사용됩니다.
+
+```java
+@Controller
+public class PageController {
+
+    @GetMapping("/hello")
+    public String hello(Model model) {
+        model.addAttribute("message", "Hello!");
+        return "hello";  // templates/hello.html 렌더링
+    }
+}
+```
+
+- @RestController 는 기본 반환 방식이 JSON, XML(객체 직렬화) 이며, REST API 응답에 사용됩니다.(주로 JSON 반환)
+
+```java
+@RestController
+public class ApiController {
+
+    @GetMapping("/api/hello")
+    public Map<String, String> hello() {
+        return Map.of("message", "Hello!");
+        // JSON: { "message": "Hello!" }
+    }
+}
+```
+- @Controller + @ResponseBody 의 조합
+- 반환값을 HTTP 응답 본문(body) 에 바로 JSON/XML 등으로 전송
+- RESTful API 개발에 최적화
+    
+</details>
+
+-----------------------
