@@ -197,42 +197,110 @@ public class ApiController {
 
 -----------------------
 
-### @Controller, @RestController 차이
+### Java Interface's default Method
 
 <details>
     <summary> 예비 답안 </summary>
     <br />
 
-- @Controller 는 기본 반환 방식이 View 이름(String) 이며, HTML 페이지 반환 등 템플릿 기반 응답에 사용됩니다.
+- java 8 이 등장하면서 인터페이스 개념에 디폴트 메서드(default Method) 를 사용할 수 있게 되었습니다. 원래 기존의 인터페이스는 추상 메서드만 존재할 수 있었고 이를 상속받는 구현체에서 직접 해당 추상 메서드를 구현해야만 하는 상황이였습니다.
+
+ ClassA, ClassB, ClassC 총 3개의 클래스가 InterfaceA를 구현하고 있습니다. 이때, 요구사항이 추가되면서 InterfaceA에 특정 추상 메서드 methodA를 추가해야된다고 생각해봅시다.
+
+그러면 인터페이스 원칙에 의해 ClassA, ClassB, ClassC에 모두 methodA 를 구현 해야할 것입니다. 현재는 3개밖에 없지만 InterfaceA 를 상속받는 클래스가 10개가 넘어가는 상황에는 모두 구현해야 합니다.
+
 
 ```java
-@Controller
-public class PageController {
+public interface Interface {
+   // 추상 메서드 
+    void abstractMethodA();
+    void abstractMethodB();
+    void abstractMethodC();
 
-    @GetMapping("/hello")
-    public String hello(Model model) {
-        model.addAttribute("message", "Hello!");
-        return "hello";  // templates/hello.html 렌더링
+	// default 메서드
+    default int defaultMethodA(){
+    	...
+    }
+}
+```
+기존의 추상 메서드와 다른 점은
+- 메서드 앞에 `default` 예약어를 붙여야 합니다.
+- 구현부 `{}` 가 있어야 합니다.
+
+# default Method 예시
+
+```java
+public interface PaymentProcessor {
+    void process();
+}
+
+public class KakaoPayProcessor implements PaymentProcessor {
+
+    @Override
+    public void process() {
+        System.out.println("Processing with KakaoPay");
+    }
+}
+
+public class NaverPayProcessor implements PaymentProcessor {
+
+    @Override
+    public void process() {
+        System.out.println("Processing with NaverPay");
+    }
+}
+
+```
+공용 결제 처리를 하는 PaymentProcessor 를 네이버, 카카오가 상속받은 코드입니다. 새로운 요구사항으로 메서드를 추가해야 하는 상황을 예시로 들어보겠습니다. 
+
+```java
+public interface PaymentProcessor {
+    void process();
+    String getPaymentMethodName(); // 새로운 추상 메서드 추가
+}
+```
+예를 들어, 결제 방식에 대한 설명을 추가하기 위해 getPaymentMethodName() 메서드를 추가한다고 해봅시다. 그러면 기존의 모든 구현 클래스인 KakaoPayProcessor, NaverPayProcessor 등 모두 컴파일 오류가 발생합니다. 기존 클래스들의 변경이 불가피한 상태죠.
+
+```java
+public interface PaymentProcessor {
+    void process();
+
+    default String getPaymentMethodName() {
+        return "Unknown Payment Method";
+    }
+}
+
+public class KakaoPayProcessor implements PaymentProcessor {
+
+    @Override
+    public void process() {
+        System.out.println("Processing with KakaoPay");
+    }
+
+    @Override
+    public String getPaymentMethodName() {
+        return "KakaoPayProcessor";
     }
 }
 ```
 
-- @RestController 는 기본 반환 방식이 JSON, XML(객체 직렬화) 이며, REST API 응답에 사용됩니다.(주로 JSON 반환)
+이렇게 하면 새로운 구현체에서는 필요하면 오버라이딩하고, 기존 구현체는 변경하지 않아도 컴파일 오류 없이 동작하게 됩니다.
 
-```java
-@RestController
-public class ApiController {
+### default Method 의 장점
+인터페이스에 추상 메서드를 추가하게 되면 모든 구현체에 구현을 해야 합니다. 이를 default method 를 사용하여 추가 변경을 막을 수 있습니다.
+이로써 OCP 에서 확장에 개방되어 있고, 변경에 닫힌 코드를 설계할 수 있습니다.
 
-    @GetMapping("/api/hello")
-    public Map<String, String> hello() {
-        return Map.of("message", "Hello!");
-        // JSON: { "message": "Hello!" }
-    }
-}
-```
-- @Controller + @ResponseBody 의 조합
-- 반환값을 HTTP 응답 본문(body) 에 바로 JSON/XML 등으로 전송
-- RESTful API 개발에 최적화
+### default Method 간의 충돌
+default method를 사용하면 크게 2가지 충돌 상황이 발생할 수 있습니다.
+
+1. 여러 인터페이스의 디폴트 메서드 간의 충돌
+2. 디폴트 메서드와 상위 클래스의 메서드 간의 충돌
+
+default method는 인터페이스를 구현한 클래스에서 코드를 구현할 필요가 없을 뿐이지, 구현을 할 수 없는 것이 아닙니다.
+
+즉, 인터페이스를 구현하는 클래스에서 default method를 재정의할 수 있습니다.
+
+따라서, 위와 같은 충돌 상황이 일어나는 클래스에서 defalt method를 재정의하면 충돌 상황을 해결할 수 있습니다.
     
 </details>
 
