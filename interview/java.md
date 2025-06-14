@@ -376,6 +376,22 @@ public class StringTest {
 
 -----------------------
 
+### Equals & HashCode는 왜 재정의를 해야할까?
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+객체들의 최상위 클래스 Object는 기본적으로 equals가 주소 값을 비교하는 동일성 체크와 동일하며 우리는 객체의 equals 재정의를 통해 내부 값이 같으면 두 객체가 논리적으로 동등하다고 판단할 수 있다.
+
+그렇다면 HashCode는 왜 재정의를 해야할까?
+
+`"Object의 명세서에는 equals(Object)가 두 객체를 같다고 판단했다면, 두 객체의 hashCode는 똑같은 값을 반환해야 한다."` 라는 조항이 존재합니다. 이를 위해 우리는 equals를 재정의할 때는 hashCode도 반드시 재정의해야 한다.
+    
+</details>
+
+-----------------------
+
 ### 스프링의 의존 자동 주입 방법
 
 <details>
