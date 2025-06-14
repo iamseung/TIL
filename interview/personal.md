@@ -385,6 +385,37 @@ $2a$10$K1qLkjF9VQCd8N95fB6NUu8d87dBD23S3WxL6y/4EXR1MiPx8FlpG
 - 사용자의 상태(Session) 유지 및 멀티스레딩 기반 요청 처리.
 5.	보안, 로깅, 예외 처리 등 다양한 미들웨어 기능 제공
 
+- WAS는 보통 Servlet Container 역할을 하며, Servlet Lifecycle을 관리합니다.
+- Spring Boot는 내장 Tomcat을 사용하여 애플리케이션과 WAS를 함께 배포할 수 있습니다.
+- WAS가 죽었을 때를 대비해 로드밸런서와 여러 인스턴스를 구성하거나, 무중단 배포 전략(Blue-Green, Canary)을 사용합니다.
+
+</details>
+
+-----------------------
+
+### Web Server란?
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+- 웹 서버(Web Server) 는 클라이언트(보통 웹 브라우저)로부터의 HTTP 요청을 받아, 정적인 리소스(HTML, CSS, JavaScript, 이미지 등)를 응답하는 서버입니다.
+- 필요에 따라 동적 요청은 WAS로 전달(proxy)하여 협업합니다.
+
+✅ 주요 역할
+1.	정적 콘텐츠 제공
+- 웹 페이지, 이미지, JS, CSS 파일 등을 빠르게 응답
+2.	요청 라우팅
+- URL 또는 경로에 따라 특정 파일이나 백엔드(WAS)로 요청을 전달
+3.	리버스 프록시 역할
+- WAS 앞단에서 요청을 필터링하고, 보안/부하 분산 기능을 수행
+4.	보안 기능 제공
+- HTTPS, 인증, 접근 제한 등
+5.	로드 밸런싱
+- 여러 WAS 인스턴스에 트래픽을 분산
+
+> 예를 들어, Nginx + Spring Boot (내장 Tomcat) 조합에서는 정적 자원은 Nginx가 직접 응답하고,
+/api/** 같은 REST 요청은 Nginx가 리버스 프록시 방식으로 WAS에 전달합니다.
+
 </details>
 
 -----------------------
