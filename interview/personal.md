@@ -416,6 +416,7 @@ $2a$10$K1qLkjF9VQCd8N95fB6NUu8d87dBD23S3WxL6y/4EXR1MiPx8FlpG
 > 예를 들어, Nginx + Spring Boot (내장 Tomcat) 조합에서는 정적 자원은 Nginx가 직접 응답하고,
 /api/** 같은 REST 요청은 Nginx가 리버스 프록시 방식으로 WAS에 전달합니다.
 
+> Web Server는 단순히 파일을 전달하는 역할을 넘어서, 리버스 프록시와 보안, 로드밸런싱까지 포함한 프론트 게이트 역할을 수행합니다. 보통 WAS와 함께 연동되어 웹 애플리케이션의 성능과 확장성을 높이기 위한 핵심 구성 요소로 사용됩니다.
 </details>
 
 -----------------------
