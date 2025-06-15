@@ -339,3 +339,29 @@ public class StringTest {
 </details>
 
 -----------------------
+
+### 자바의 예외에 대해 설명해주세요
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+### Checked Exception
+- Exception을 상속하며 Checked Exception 또는 Compile Time Exception이라고 한다.
+- 컴파일 시점에서 Exception을 catch하는지 확인한다.
+    - 컴파일 시점에 Exception에 대한 처리(try/catch)를 하지 않을 경우 컴파일 에러가 발생한다.
+- Exception이 발생하는 메소드에서 throws 예약어를 활용해 Exception을 호출 메소드에 전달해야 한다.
+
+### Unchecked Exception
+- RuntimeException을 상속하며 Runtime Time Exception이라고 한다.
+- 컴파일 시점에 Exception을 catch하는지 확인하지 않아 컴파일 시점에 예외 여부를 확인할 수 없다.
+- Exception이 발생하는 메소드에서 throws 예약어를 활용해 Exception을 처리할 필요가 없다. 하지만 처리해도 무방하다.
+
+### Java Exception
+- `Error` : 애플리케이션이 정상적으로 동작하는데 심각한 문제가 있는 경우
+- `Exception` : 비즈니스 로직 상에서 에러가 발생하는 경우 사용한다. Exception을 사용하는 경우 컴파일 시점에 Exception을 확인할 수 있다. Checked Exception이라고도 한다.
+- `RuntimeException` : NumberFormatException과 같이 Runtime 시에 발생하는 에러를 처리하는데 사용한다. Unchecked Exception이라고도 한다.
+    
+</details>
+
+-----------------------
