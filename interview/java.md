@@ -11,11 +11,12 @@ Java 9 : 인터페이스 내에서 private 메서드 사용이 가능
 Java 10 : 타입 추론 변수 var 추가, 병렬 처리 GC, 개별 스레드로 분리된 Stop the world등이 추가됐다.
 
 - 기존에는 Stop-The-World 가 발생하면 GC 를 실행하는 쓰레드를 제외한 나머지 쓰레드는 모두 작업을 멈춘다. GC 작업을 완료한 이후에야 중단했던 작업을 다시 시작한다. 근데 이게 개별 쓰레드로 분리되어서 Stop-The-World 시간이 개선된것 같다.
-Java  11 : String 메서드 추가(strip(), isBlank(), lines(), repeat()), 람다 파라미터로 var사용
+
+Java  11 : 람다 파라미터로 var 사용, String 메서드 추가(strip(), isBlank(), lines(), repeat())
 
 Java  12~14 : 스위치 표현식 개선 (표현식에서 값 반환 가능)
 
-Java  17 : Sealed Class, Pattern Matching for Instanceof, Record
+Java  17 : Sealed Class, Pattern Matching for Instanceof, Record 등
 
 </details>
 
@@ -291,20 +292,50 @@ public class StringTest {
 -----------------------
 
 ### StringBuilder, StringBuffer의 특징과 차이점에 대해 설명해주세요
-- 둘 다 내부적으로 가변적인 char[]를 멤버 변수로 가집니다.
-- 새로운 인스턴스를 생성하지 않고 char[]를 변경할 수 있어서 문자열을 여러번 연결하거나 변경할 때 사용하면 유용합니다.
-- 출력은 나중에 toString() 메서드로 String반환을 해주면 됩니다.
-- StringBuilder와 StringBuffer는 char[] (character buffer)를 갖는 공통점이 있으나 StringBuffer는 multi-thread환경에서 동기화(synchronization)가 보장됩니다.
-- 그래서 single thread 프로그래밍의 경우는 StringBuilder사용을 권장하며 multi-thread환경에서는 StringBuffer를 사용을 권장한다.
 
 <details>
     <summary> 예비 답안 </summary>
     <br />
 
-객체들의 최상위 클래스 Object는 기본적으로 equals가 주소 값을 비교하는 동일성 체크와 동일하며 우리는 객체의 equals 재정의를 통해 내부 값이 같으면 두 객체가 논리적으로 동등하다고 판단할 수 있다.
-
-그렇다면 HashCode는 왜 재정의를 해야할까?
-
-`"Object의 명세서에는 equals(Object)가 두 객체를 같다고 판단했다면, 두 객체의 hashCode는 똑같은 값을 반환해야 한다."` 라는 조항이 존재합니다. 이를 위해 우리는 equals를 재정의할 때는 hashCode도 반드시 재정의해야 한다.
+- 둘 다 내부적으로 가변적인 char[]를 멤버 변수로 가집니다.
+- 새로운 인스턴스를 생성하지 않고 char[]를 변경할 수 있어서 문자열을 여러번 연결하거나 변경할 때 사용하면 유용합니다.
+- 출력은 나중에 toString() 메서드로 String반환을 해주면 됩니다.
+- StringBuilder와 StringBuffer는 char[] (character buffer)를 갖는 공통점이 있으나 `StringBuffer는 multi-thread환경에서 동기화(synchronization)가 보장됩니다`.
+- `그래서 single thread 프로그래밍의 경우는 StringBuilder사용을 권장하며 multi-thread환경에서는 StringBuffer를 사용을 권장한다.`
     
 </details>
+
+-----------------------
+
+### String, Integer와 같은 클래스는 import 없이 어떻게 사용이 가능할까?
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+> 자바는 빌드를 하며 빌트인 패키지를 자동으로 import한다. String, Integer, System과 같은 클래스가 속해있는 java.lang은 해당 클래스에 해당하여 자동으로 import한다.
+    
+</details>
+
+-----------------------
+
+### Generic, 제너릭에 대해 설명해주세요.
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+- 제네릭은 클래스나 메소드에서 사용할 내부 데이터 타입을 컴파일 시에 미리 지정하는 방법입니다.
+- List와 같이 다양한 종류의 데이터를 관리하는 경우 데이터의 타입을 특정 타입으로 고정할 수 있다.
+
+### Generic의 장점
+
+- 제네릭을 사용하면 잘못된 타입이 들어올 수 있는 것을 컴파일 단계에서 방지할 수 있다.
+- 특정 타입으로 제한함으로써 타입 안정성을 제공한다.
+- 타입 체크와 형변환을 생략할 수 있으므로 코드가 간결해 진다.
+    - 클래스 외부에서 타입을 지정해주기 때문에 따로 타입을 체크하고 변환해줄 필요가 없다. 즉, 관리하기가 편하다.
+- 비슷한 기능을 지원하는 경우 코드의 재사용성이 높아진다.
+    
+</details>
+
+-----------------------
