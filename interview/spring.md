@@ -142,3 +142,19 @@ public class ApiController {
 </details>
 
 -----------------------
+
+### Spring 의 3대 요소
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+- AOP, DI, PSA Spring이 위의 3가지 요소를 통해 어떤 것을 추구할까?
+    - POJO를 통해 비즈니스 로직에 집중할 수 있도록 하는 것이다.
+
+> `PSA (Portable Service Abstraction)`
+> - 추상화 계층을 사용하여 어떤 기술을 내부에 숨기고 개발자에게 편의성을 제공해주는 것이 서비스 추상화(Service Abstraction)
+    
+</details>
+
+-----------------------
