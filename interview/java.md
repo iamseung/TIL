@@ -96,6 +96,8 @@ Mark-Sweep 이란 다양한 GC에서 사용되는 객체를 솎아내는 내부 
 
 </details>
 
+-----------------------
+
 ### Java Interface's default Method
 
 <details>
