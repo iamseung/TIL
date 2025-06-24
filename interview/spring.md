@@ -201,3 +201,16 @@ public class ApiController {
 </details>
 
 -----------------------
+
+### Dispatcher Servlet이란? + MVC 동작방식에 대해 설명해주세요
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+Servlet의 단점을 보완하기 위해 만들어진 것이 FrontController Pattern을 적용한 Dispatcher Servlert이 만들어졌다. 요청이 오면 Dispatcher Servlet에서 요청을 처리해줄 Servlet을 찾는 해준다. 요청에 따라 Servlet을 1대1로 생성하는 구조에서 Front Controller가 올바른 핵심 비즈니스 로직을 수행하게 변하여 생성해야하는 Servlet의 개수가 1개로 줄어들었다.
+
+![poster](../image/dispatcher-servlet.png)
+</details>
+
+-----------------------
