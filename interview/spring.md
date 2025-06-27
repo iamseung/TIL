@@ -214,3 +214,14 @@ Servlet의 단점을 보완하기 위해 만들어진 것이 FrontController Pat
 </details>
 
 -----------------------
+
+### Application Context와 Servlet Context의 차이가 무엇인가요?
+
+<details>
+    <summary> 예비 답안 </summary>
+    <br />
+
+Application Context는 Spring내에서 Bean들이 저장되는 context이고 Servlet은 Dispatcher Servlet의 context이다.
+</details>
+
+-----------------------
